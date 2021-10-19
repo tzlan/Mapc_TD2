@@ -1,0 +1,49 @@
+    @startuml
+    'https://plantuml.com/component-diagram
+
+
+    interface Composant
+    {
+     getName(): String
+     getOwner(): Owner
+     getSize(): int
+     getContient(): String
+     appendContent (in content : String) : void
+     setOwner(in owner : Owner)
+    }
+
+    abstract ComposantImpl
+    {
+       - name : $
+
+       + this (in name : $, in o: Owner)
+       getOwner(): Owner{ return Owner}
+       getName() : String{ return name }
+    }
+
+    class Owner {
+    -name: String
+    +this (in return : String)
+    +equals
+    +hashCpde
+    +toString
+
+    }
+
+    class Fichier{
+    -contenu : $
+    }
+    class Repertoire{}
+
+
+    Fichier --> ComposantImpl
+    Repertoire --> ComposantImpl
+    Composant <|.. ComposantImpl
+
+    Composant  "-elems " <--* Repertoire
+
+
+
+      Owner "1  -owner" <--   ComposantImpl
+
+    @enduml
